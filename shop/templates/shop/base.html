@@ -1,0 +1,226 @@
+{% load static %}
+{% load shop_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Market{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+    {% block style %}{% endblock style %}
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,700;1,100;1,500;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+</head> 
+<body> 
+    <nav class="color-dark-blue">
+        <div class="wrapper">
+            <div class="header__menu">
+                <ul class="munu__left">
+                
+                    {% if not request.user.is_authenticated %}
+                        <li><a href="{% url 'accounts:login' %}?next={{request.path}}">Войти</a></li>
+                        <li><a href="{% url 'accounts:register' %}?next={{request.path}}">Зарегестрироваться</a></li>
+                    {% else %}
+                        <li><a style="text-decoration: underline;" href="{% url 'accounts:user_account' request.user.pk %}">Вы вошли как: {{request.user.username}}</a></li>
+                        <li><a href="{% url 'accounts:logout' %}?next={{request.path}}">Выйти</a></li>
+                    {% endif %}
+                </ul>
+
+                <ul class="menu__right">
+                    <li><a href="">Помощь</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'accounts:user_account' request.user.pk %}">Аккаунт</a></li>
+                    {% else %}
+                        <li><a href="{% url 'accounts:login' %}?next={{request.path}}">Аккаунт</a></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="main__header">
+        
+            
+        <div class="first_block">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="logo">
+                        <div class="logo__image">
+                            <img src="{% static 'shop/images/Vector.png' %}" alt="MARKET">
+                        </div>
+                        <div class="logo__title"><h1>SUPERMARKET</h1></div><br>
+                    </div>
+                    <div class="search__block">
+                        
+
+                        <form class="search" action="{% url 'shop:search_heandler'  %}" method="POST">
+                            {% csrf_token %}
+
+                            <input class="search_line" id="search_line" placeholder="Search..." type="text" name="search_line">
+                            <!-- <input class="show_categories" id="show_categories" type="submit" value="All search"> -->
+                            <input class="yellow_button" id="get_search" type="submit" value="FIND">
+                        </form>
+
+                        <div class="items">
+                            <div class="item-link">
+                                {% if request.user.is_authenticated %}
+                                    <a href="{% url 'orders:detail_cart' request.user.pk %}"><img src="{% static 'shop/images/BG.png' %}" alt=""></a>
+                                {% else %}
+                                    <a href=""><img src="{% static 'shop/images/BG.png' %}" alt=""></a>
+                                {% endif %}
+
+                            </div>
+
+                            
+
+                            <div class="item-iformation">
+                                {% if request.user.is_authenticated %}
+
+                                    <div class="item-value">{{request.user.account.cart.get_amount_products}} items: </div>
+                                    <div class="item-price">{{request.user.account.cart.get_final_price}}&#8381</div>
+
+
+                                {% else %}
+
+                                    <div class="item-value">0 items: </div>
+                                    <div class="item-price">0&#8381</div>
+
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="second_block color-blue">
+            <div class="wrapper">
+                <div class="main__menu">
+                    <div class="links_box">
+                        <div class="title_links_box">DEPARTMENTS</div>
+                    </div>
+                    <div class="menu_container color-dark-grey">
+                        
+                        <!-- 
+                            <li><a href="{% url 'shop:home' %}">ГЛАВНАЯ</a></li>
+                            <li><a href="{% url 'shop:products' %}">ТОВАРЫ</a></li>
+                            <li><a href="">КАТЕГОРИИ</a></li>
+                            <li><a href="">PAGES</a></li>
+                            <li><a href="">ДОСТАВКА И ОПЛАТА</a></li>
+                            <li><a href="">О МАГАЗИНЕ</a></li>
+                         -->
+                        <div class="dropdown">
+                            <a href="{% url 'shop:home' %}">ГЛАВНАЯ</a>
+                            <ul class="dropdown-child">
+                                <!-- <a href="">Подраздел 1</a> -->
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="{% url 'shop:products' %}">ТОВАРЫ</a>
+                            <ul class="dropdown-child">
+                                <a href="{% url 'shop:models_view' 'shoes' %}">ОБУВЬ</a>
+                                <a href="{% url 'shop:models_view' 'garment' %}">ОДЕЖДА</a>
+                                <a href="{% url 'shop:models_view' 'accessory' %}">АКСЕССУАРЫ</a>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="">КАТЕГОРИИ</a>
+                            <ul class="dropdown-child">
+                                <!-- <a href=""></a> -->
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="">НОВОСТИ</a>
+                            <ul class="dropdown-child">
+                                <!-- <a href=""></a> -->
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="">О МАГАЗИНЕ</a>
+                            <ul class="dropdown-child">
+                                <a href="">ИНФОРМАЦИЯ</a>
+                                <a href="">ПУНКТЫ ВЫДАЧИ</a>
+                                <a href="">ДОСТАВКА</a>
+                                <a href="">ВОЗВРАТ</a>
+                                <a href="">ОПЛАТА</a>
+                            </ul>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </header>
+
+
+    {% block content %}{% endblock %}
+
+
+    <footer>
+        <div class="footer-links">
+            <div class="wrapper">
+                <div class="conteiner">
+                    <div class="common-container">
+                        <img src="https://img.icons8.com/material-sharp/48/ffffff/telegram-app.png"/>
+                        <div class="white-bold-text">SIGNUP TO <br> NEWLETTER</div>
+                    </div>
+                    <div class="content">
+                        <input class="search_line" type="text" placeholder="Enter Your Email Adress">
+                        <input type="button" class="yellow_button" value="SUBMIT">
+                    </div>
+                    <div class="common-container">
+                        <div class="white-bold-text">МЫ В СОЦ СЕТЯХ</div>
+                        <div class="links">
+                            <a href=""><img class="white-circle" src="{% static 'shop/images/footer/facebook.png' %}" alt=""></a>
+                            <a href=""><img class="white-circle" src="{% static 'shop/images/footer/instagram.png' %}" alt=""></a>
+                            <a href=""><img class="white-circle" src="{% static 'shop/images/footer/hui.png' %}" alt=""></a>
+                            <a href=""><img class="white-circle" src="{% static 'shop/images/footer/paintrees.png' %}" alt=""></a>
+                            <a href=""><img class="white-circle" src="{% static 'shop/images/footer/tweter.png' %}" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="anotations">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="block">
+                        <div class="low-title">ПОМОЩЬ</div>
+                        <div class="low-content">Nemo unde voluptatibus et rerum nulla eum rerum occaecati omnis. Voluptates unde fugiat in exercitationem sunt. Ex id rerum et porro.</div>
+                    </div>
+                    <div class="block">
+                        <div class="low-title">О НАС</div>
+                        <div class="low-content">Similique repudiandae ipsa laborum autem dolor alias rem nobis ut. Officiis provident ex amet rem et. Id ab aspernatur.</div>
+                    </div>
+                    <div class="block">
+                        <div class="low-title">СПОСОБЫ ОПЛАТЫ</div>
+                        <div class="low-content">Velit aspernatur id perferendis. Maiores aut provident saepe repellat. Est id accusantium eligendi cumque.</div>
+                    </div>
+                    <div class="block">
+                        <div class="low-title">ДОСТАВКА</div>
+                        <div class="low-content">Aut sunt omnis. Nisi esse aspernatur voluptas esse sit voluptate ipsum qui. Repudiandae repellat similique dolorum et repellat esse.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="last-footer">
+            <div class="wrapper">
+                <div class="low-content">
+                    @COPYRIGHT - SUPERMART BUILT BY ME
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'shop/js/slider.js' %}"></script>
+</body>
+</html>

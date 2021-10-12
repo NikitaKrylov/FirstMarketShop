@@ -1,0 +1,136 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <section class="account-page">
+
+        <div class="container">
+
+            <div class="wrapper">
+
+                <div class="content">
+
+                    <div class="label-block"><h2>Личный кабинет</h2></div>
+
+                    <div class="main-grid-column">
+
+                        <div class="grid-column">
+                            <div class="baner-content">
+                                <div class="baner-label">Персональная информация</div>
+                                <div class="content-body">
+                                    <div class="information"><p style="color: #333333;">Имя аккаунта\пользователя</p> <p style="color: #3b83d4;">{{ object.username }}</p></div>
+                                    <div class="information"><p style="color: #333333;">Электронная почта:</p> <p style="color: #3b83d4;">{% if object.email %} {{ object.email }} {% else %} Не указано {% endif %}</p></div>
+                                    <div class="information"><p style="color: #333333;">Фамилия, Имя:</p> <p style="color: #3b83d4;">{% if object.first_name and object.last_name %} {{ object.first_name }} {{ object.last_name }} {% else %} Не указано {% endif %}</p></div>
+                                </div> 
+                                <div class="button-area">
+                                    <a class="baner-button" href="">ИЗМЕНИТЬ ДАННЫЕ</a>
+                                    <a class="baner-button" href="{% url 'accounts:password_reset' %}">ИЗМЕНИТЬ ПАРОЛЬ</a>
+                                </div>
+                            </div>
+
+                            <div class="baner-content">
+                                <div class="baner-label">Избранное</div>
+                                <div class="content-body">
+                                    <div class="info-small">
+                                        <a href="">Название товара</a>
+                                        <span>Цена: 21000p.</span>
+                                    </div>
+                                    <div class="info-small">
+                                        <a href="">Название товара</a>
+                                        <span>Цена: 3000p.</span>
+                                    </div>
+                                    <p style="text-align:center; color: #333333; margin: 0;">•••</p>
+                                    
+                                </div> 
+                                <div class="button-area">
+                                    <a class="baner-button" href="">ПРОСМОТРЕТЬ ВСЕ</a>
+                                </div>
+                            </div>
+
+
+                            
+                        </div>
+
+                        <div class="grid-column">
+
+                            <div class="baner-content">
+                                <div class="baner-label">Профиль доставки</div>
+                                <div class="content-body">
+                                    <!-- <span style="color: #333333;"><strong>Действующий адресс: </strong> г.Москва, ул.Ленина, дом 5, корпус 1, кв. 154</span> -->
+                                    <div class="info-small">
+                                        <span><strong>Aдресс доставки: </strong> {{object.account.delivery_address}}</span>
+                                    </div>
+                                </div> 
+                                <div class="button-area">
+                                    <a class="baner-button" href="{% url 'accounts:update_account' request.user.pk 'delivery_address' %}?next={{request.path}}">ИЗМЕНИТЬ АДРЕСС</a>
+            
+                                </div>
+                            </div>
+                            <div class="baner-content">
+                                <div class="baner-label">Корзина</div>
+                                <div class="content-body">
+                                    {% if latest_cart_products %}
+                                        {% for cart_product in latest_cart_products %}
+
+                                            <div class="info-small">
+                                                <a href="{% url 'shop:product_page' cart_product.get_product_model cart_product.get_product_slug %}">{{ cart_product.get_name }}</a>
+                                                <span>Цена: {{cart_product.get_price}}p.</span>
+                                                <span>Колличество: {{cart_product.quantity}}</span>
+                                                <span>Общая цена: {{cart_product.calc_finale_price}}</span>
+                                            </div>
+
+                                        {% endfor %}
+                                    {% else %}
+                                        <h4 style="color: black;">Корзина пуста</h4>
+                                    {% endif %}
+
+                                </div> 
+                                <div class="button-area">
+                                    
+                                        <a class="baner-button" href="{% if latest_cart_products %}{% url 'orders:detail_cart' request.user.pk %}{% endif %}">ИЗМЕНИТЬ КОРЗИНУ</a>
+                                        <a class="baner-button" href="{% if latest_cart_products %}{% url 'orders:create_order' request.user.pk %}{% endif %}">ОФОРМИТЬ ЗАКАЗ</a>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="grid-column">
+                            <div class="baner-content">
+                                <div class="baner-label">История заказов</div>
+                                <div class="content-body">
+
+                                    {% if orders %}
+                                        {% for order in orders %}
+
+                                            <div class="info-small">
+                                                <a href="{% url 'orders:detail_order' request.user.pk order.id %}">Заказ #{{order.id}} <div class="pub_date">от {{order.created}}</div></a>
+                                                <span>{{order.final_price}}р.   В обработке</span>
+                                            </div>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div> 
+                                <div class="button-area">
+                                    <a class="baner-button" href="">ПОКАЗАТЬ ВСЕ ЗАКАЗЫ</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock content %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock style %}

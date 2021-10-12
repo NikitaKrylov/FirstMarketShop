@@ -1,0 +1,235 @@
+button{
+  padding: none;
+  border: none;
+  margin: none;
+}
+
+
+.account-page .label-block {
+  color: #333333;
+  font-size: calc(14px + 7 * (100vw / 1580));
+  text-align: center;
+  padding: 5% 50px;
+}
+
+.account-page .main-grid-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 3%;
+  margin-bottom: 50px;
+  padding: 0 1%;
+}
+
+.main-grid-column .grid-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.baner-content {
+  border-radius: 10px;
+  background-color: #ffff;
+  margin: 5% 0;
+}
+
+.baner-content .baner-label {
+  color: #333333;
+  text-align: center;
+  font-size: calc(10px + 7 * (100vw / 1580));
+  font-weight: 500;
+  padding: 8px 10px;
+  border-bottom: 1px solid #d7d7d9;
+}
+.baner-content .content-body {
+  padding: 5%;
+}
+.content-body .information {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.information p {
+  font-size: calc(10px + 5 * (100vw / 1580));
+}
+
+.baner-content .button-area {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0 2%;
+}
+a.baner-button {
+  background-color: #408ce3;
+  color: #ffff;
+  font-size: calc(8px + 3 * (100vw / 1580));
+  padding: 6px 12px;
+  margin: 10px 8px;
+  border-radius: 3px;
+  box-shadow: 0px 10px 30px 0px rgb(0 0 0 / 15%);
+}
+a.baner-button:hover {
+  background-color: #ffd200;
+  box-shadow: 0px 10px 30px 0px rgb(1 1 1 / 15%);
+}
+
+.info-small {
+  padding: 3% 0;
+}
+
+.info-small a {
+  font-size: calc(10px + 5 * (100vw / 1580));
+  color: #408ce3;
+  font-weight: 500;
+}
+.info-small a:hover {
+  color: #ff0835;
+}
+
+.info-small span {
+  font-size: calc(10px + 5 * (100vw / 1580));
+  color: #333333;
+  display: block;
+  margin: 5px 0;
+}
+
+/* CART */
+
+/* RIGHT BAR */
+
+.right-bar {
+  background-color: #fff;
+  border-radius: 8px;
+  color: #333333;
+  padding: 3% 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-bar .bar-name {
+  font-size: calc(11px + 8 * (100vw / 1580));
+  font-weight: 500;
+  padding: 2% 4%;
+  text-align: center;
+}
+
+.right-bar .bar-content {
+  flex-grow: 2;
+}
+
+/* CART BLOCK */
+.grid-block {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-column-gap: 1.5%;
+}
+
+.cart-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30px;
+  margin-bottom: 50px;
+  padding: 0 1%;
+  color: #333333;
+}
+
+.cart-content {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-column-gap: 1.5%;
+}
+
+a.product-name-label {
+  font-size: calc(10px + 7 * (100vw / 1580));
+  font-weight: 500;
+  color: #333333;
+  display: block;
+}
+a.product-name-label:hover{
+  color: #408ce3;
+}
+
+
+.cart-block-image img {
+  width: 100%;
+}
+
+.cart-block-content {
+  border-left: 2px solid #f0f2f5;
+  padding-left: 1.5%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: center;
+}
+
+.send-cart-btn {
+  background-color: #408ce3;
+  padding: 17px 25px;
+  font-size: calc(10px + 7 * (100vw / 1580));
+  width: max-content;
+  border-radius: 6px;
+  color: #ffff;
+}
+
+.send-cart-btn:hover {
+  background-color: #ffd200;
+}
+
+.product-btn-area {
+  display: flex;
+}
+
+.cart-del-btn,
+.save-btn {
+  padding: 1% 2%;
+  border-radius: 5px;
+  color: #f0f2f5;
+  font-size: calc(7px + 5 * (100vw / 1580));
+  margin: 0 0.8%;
+  box-shadow: 0px 10px 20px 0px rgb(1 1 1 / 15%);
+}
+
+.save-btn {
+  background-color: #1bb019;
+}
+.cart-del-btn {
+  background-color: red;
+}
+
+.num-block {
+  display: flex;
+  position: relative;
+  margin-left: 4%;
+  border: 2px solid #f0f2f5;
+  width: 13%;
+  min-width: 50px;
+}
+
+.num-block .product-value-input {
+  display: flex;
+  border-radius: 1em;
+  padding: 7px 5%;
+  font-size: calc(7px + 5 * (100vw / 1580));
+  background-color: #fff;
+  text-align: center;
+  width: 30%;
+  pointer-events: none;
+}
+.change-value-btn {
+  border-radius: 5px;
+  width: 30%;
+  padding: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  color: #333333;
+}

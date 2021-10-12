@@ -1,0 +1,91 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <section class="category-page">
+
+        <div class="wrapper">
+
+            
+
+            <div class="container">
+
+                <div class="main-title-block">
+                    <div class="category-title-block">
+                        
+                        <h2 class="category-title-name">{{model_name}}</h2>
+                        <div class="category-liks">
+                            <ul style="display: flex;">
+                                {% for category in categories %}
+                                    {% if category == category_name %}
+                                        <li><a style="color: #3b83d4;" href="{% url 'shop:category_model_view' ct_model category %}">{{category}}</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'shop:category_model_view' ct_model category %}">{{category}}</a></li>
+                                    {% endif%}
+                                    
+                                {% endfor %}
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        
+
+    </section>
+
+
+    <section class="search_responce">
+        <div class="wrapper">
+            <div class="container">
+                <div class="content">
+                    {% if object_list %}
+                        {% for product in object_list  %}
+
+                            <a href="{% url 'shop:product_page' product.get_model_name product.slug   %}" >
+                                <div class="item ">
+                                    
+                                    <div class="item-block-img">
+                                        <img src="{{ product.image.url }}" alt="">
+                                    </div>
+                                    <div class="main-item-block">
+                                        <div class="kategories">
+                                            {% for category in product.categories.all %}
+                                                {{category.name}}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="item-name">{{ product }}</div>
+                                        <div class="item-price">{{ product.price }} р.</div>
+                                        <div class="item-mark"></div>
+                                    </div>
+                                    </div>
+                                
+                            </a>
+
+                        {% endfor %}
+                    
+                    {% else %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            
+                                <div class="none-search-message">{{ message}}</div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    {% endif %}
+
+                        
+                         
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock content %}
+
+    

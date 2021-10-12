@@ -1,0 +1,69 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+    <section class="search_responce">
+        <div class="wrapper">
+            <div class="container">
+                
+                    {% if object_list %}
+                        <div class="content">
+
+                            {% for product in object_list  %}
+
+                                <a href="{% url 'shop:product_page' product.get_model_name product.slug   %}" >
+                                    <div class="item ">
+                                        
+                                        <div class="item-block-img">
+                                            <img src="{{ product.image.url }}" alt="">
+                                        </div>
+                                        <div class="main-item-block">
+                                            <div class="kategories">
+                                                {% for category in product.categories.all %}
+                                                    {{category.name}}
+                                                {% endfor %}
+                                            </div>
+                                            <div class="item-name">{{ product }}</div>
+                                            <div class="item-price">{{ product.price }} р.</div>
+                                            <div class="item-mark"></div>
+                                        </div>
+                                        </div>
+                                    
+                                </a>
+
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            
+                                <div class="none-search-message">{{ message}}</div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    {% endif %}
+
+                        
+                         
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="paginate-btn">
+        <!-- {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Next</a>
+        {% endif %} -->
+        {% for page in range_page_obj %}
+            {% if page_obj.number == page %}
+                <a style="background-color: #408de4;" href="?page={{page}}">{{page}}</a>
+            {% else %}
+                <a href="?page={{page}}">{{page}}</a>
+            {% endif%}
+            
+        {% endfor %}    
+
+    </section>
+
+{% endblock content %}

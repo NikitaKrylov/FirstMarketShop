@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %}
+
+{% load shop_tags %}
+
+{% block content %}
+    <section>
+        <div class="wrapper">
+            <div class="container">
+                {% for model_name, query_set in categoryset.items %}
+                    {% if query_set.category_set %}
+                        <div class="type-model-block">
+                            <div class="category-block">
+                                <div class="category-title-block">
+                                    <img src="https://img.icons8.com/ios-filled/100/4a90e2/shirt.png"/>
+                                    <a href="{% url 'shop:models_view' query_set.ct_model.get_model_name %}"><h2 class="category-title-name">{{query_set.ct_model|verbose_name}}</h2></a>
+                                </div>
+                                <div class="category-liks">
+                                    <ul>
+                                        {% for category in query_set.category_set %}
+                                            <li><a href="{% url 'shop:category_model_view' query_set.ct_model.get_model_name category %}">{{category}}</a></li>
+                                        {% endfor %}
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="items-block">
+
+                                {% for product in query_set.model_set %}
+                                    <!-- <a href="{% url 'shop:product_page' product.get_model_name product.slug   %}" > -->
+                                        <div class="item">
+                                            <div class="block-content">
+                                                <div class="item-block-img">
+                                                    <img src="{{ product.image.url }}" alt="">
+                                                </div>
+                                                <div class="main-item-block">
+                                                    <div class="kategories">
+                                                        {% for category in product.categories.all %}
+                                                            {{category.name}}
+                                                        {% endfor %}
+                                                    </div>
+                                                    <div class="item-name">{{ product }}</div>
+                                                    <div class="item-price">{{ product.price }} р.</div>
+                                                    <div class="item-mark"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                {% endfor %}
+
+                                
+                            </div>
+                        </div>
+                    {% endif %}
+
+            {% endfor %}
+                
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

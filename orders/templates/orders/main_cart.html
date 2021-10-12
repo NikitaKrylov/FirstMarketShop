@@ -1,0 +1,93 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block style %}<link rel="stylesheet" href="{% static 'orders/css/orders_style.css' %}">{% endblock style %}
+
+
+{% block content %}
+
+    <section class="account-page">
+
+        <div class="container">
+
+            <div class="wrapper">
+
+                <div class="content">
+
+                    <div class="label-block"><h2>Корзина</h2></div>
+
+                    
+                        <div class="grid-block">
+                            <div class="cart-block">
+                                {% if object_list.cart_products.all %}
+                                    {% for product in object_list.cart_products.all %}
+
+                                        <div class="cart-content">
+                                            <div class="cart-block-image">
+                                                <img src="{{product.content_object.image.url}}" alt="">
+                                            </div>
+                                            <div class="cart-block-content">
+                                                <a class="product-name-label" href="{% url 'shop:product_page' product.get_product_model product.get_product_slug %}">{{product.get_name}}</a>
+                                                <div class="info-small">
+                                                    <span>Цена: {{product.get_price}}</span>
+                                                    
+                                                    <span>Колличество: {{product.quantity}}шт.</span>
+
+                                                    <span>Общая цена: {{product.calc_finale_price}}</span>
+                                                </div>
+                                                <form action="{% url 'orders:save_product' request.user.pk product.get_product_model product.get_product_slug %}" method="POST" class="product-btn-area">
+                                                    {% csrf_token %}
+                                                    <a href="{% url 'orders:delete_product' request.user.pk product.get_product_model product.get_product_slug %}" class="cart-del-btn">Удалить все</a>
+                                                    <button type="submit" class="save-btn">Сохранить</button>
+                                                    <div class="num-block">
+                                                        <button type="button" onclick="minusValue(this)" id="{{product.content_object.slug}}" class="change-value-btn" >&#8722;</button>
+                                                        <input size="2" value="{{product.quantity}}" name="quantity" type="text" id="{{product.content_object.slug}}" class="product-value-input" readonly>
+                                                        <button type="button" onclick="plusValue(this)" id="{{product.content_object.slug}}" class="change-value-btn">&#43;</button>
+                                                        
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    
+                                    {% endfor %}
+                                {% else %}
+                                    <div style="display: flex; justify-content: center; align-items: center;">
+                                        <img style="width: 20%; margin-left: 20%;" src="{% static 'orders/images/cart.png' %}" alt="">
+                                        <div style="display: inline-block;" class="about-title title_block item-name">
+                                            <h4>В корзине нет товаров</h4>
+                                            <span>Перейдите в <a class="mark-value" href="{% url 'shop:products' %}">каталог</a> чтобы добавить товары</span>
+                                        </div>
+                                    </div>
+
+                                {% endif %}
+                                
+                            </div>
+
+                            {% if object_list.cart_products.all %}
+                                <div class="right-bar">
+                                    <div class="bar-content">
+                                        <div class="bar-name">Ваш заказ</div>                                    
+                                    </div>
+                                    <div class="bar-content">
+                                        
+                                    </div>
+                                    <div class="btn-area"><a class="send-cart-btn" href="{% if object_list.cart_products.all %}{% url 'orders:create_order' request.user.pk %}{% endif %}">Оформить заказ</a></div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="{% static 'orders/js/script.js' %}"></script>
+
+    </section>
+
+{% endblock content %}

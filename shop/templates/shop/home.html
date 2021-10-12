@@ -1,0 +1,230 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+    <section class="banners-section">
+        <div class="wrapper">
+            <div class="banners">
+                <div class="banner__main">
+
+                </div>
+                <div class="simple-banner-block">
+
+                    <div class="title_block">
+                        <h4>SPORT SUITS</h4>
+                        <div class="same-text">Chose your three-striped adidas suit.</div>
+                    </div>
+
+                    <div class="container">
+
+                        <div class="banner__simple">
+                            <div class="content">
+                                <div class="banner__simple__img">
+                                    <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/ruRU/Images/Teaser-carousel_m_tcm224-670324.jpg" alt="">
+                                </div>
+                                <div class="show-more-black-link">
+                                    <a href="">For a men</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banner__simple">
+                            <div class="content">
+                                <div class="banner__simple__img">
+                                    <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/ruRU/Images/Teaser-carousel_w_tcm224-670325.jpg" alt="">
+                                <div class="show-more-black-link">
+                                    <a href="">For a women</a>
+                                </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                        <div class="banner__simple">
+                            <div class="content">
+                                <div class="banner__simple__img">
+                                    <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/ruRU/Images/Teaser-carousel_kids_tcm224-670322.jpg" alt="">
+                                <div class="show-more-black-link">
+                                    <a href="">For a child</a>
+                                </div>
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if new_products %}
+        <section class="new-items">
+            <div class="bg-label color-blue">
+                <div class="wrapper">
+                    <div class="title_block">
+                        <h4>НОВИНКИ</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="container">
+                    <div class="content">
+
+                        {% for new_product in new_products %}
+
+                            
+                                <div class="item-block">
+                                    <a href="{% url 'shop:product_page' new_product.get_model_name new_product.slug %}" >
+                                        <div class="block-content">
+                                            <div class="item-block-img">
+                                                <img src="{{new_product.image.url}}" alt="">
+                                            </div>
+                                            <div class="main-item-block">
+                                                <div class="kategories">
+                                                    {% for category in new_product.categories.all %}
+                                                        {{category.name}}
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="item-name">{{new_product}}</div>
+                                                <div class="item-price">{{new_product.price}} р.</div>
+                                                <div class="item-mark"></div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>     
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
+    <section class="best-seller-items">
+
+        <div class="bg-label color-blue">
+            <div class="wrapper">
+                <div class="title_block">
+                    <h4>BEST SELLER</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="wrapper">
+                <div class="items-grid">
+
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes1.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Originals</div>
+                                <div class="item-name">Брюки Adicolor Classics Primeblue SST</div>
+                                <div class="item-price">5999 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes2.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Originals</div>
+                                <div class="item-name">Брюки Primeblue SST</div>
+                                <div class="item-price">7490 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes3.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Originals</div>
+                                <div class="item-name">Кроссовки Stan Smith</div>
+                                <div class="item-price">8490 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes4.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Originals</div>
+                                <div class="item-name">Шорты 3-Stripes</div>
+                                <div class="item-price">3999 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes5.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Мужчины Sport</div>
+                                <div class="item-name">Спортивный костюм AEROREADY Essentials 3-Stripes</div>
+                                <div class="item-price">9999 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horizontal-item-block">
+                        <div class="block-content">
+                            <div class="horizontal-item-block-img">
+                                <img src="images/items/clothes6.jpg" alt="">
+                            </div>
+                            <div class="main-item-block">
+                                <div class="kategories">Мужчины Sport</div>
+                                <div class="item-name">Олимпийка Adicolor Classics Primeblue SST</div>
+                                <div class="item-price">7490 р.</div>
+                                <div class="item-mark"></div>
+                                <div class="show-more-black-link">
+                                    <a href="">Show more</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,178 @@
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 84% 0%;
+  }
+  50% {
+    background-position: 17% 100%;
+  }
+  100% {
+    background-position: 84% 0%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 84% 0%;
+  }
+  50% {
+    background-position: 17% 100%;
+  }
+  100% {
+    background-position: 84% 0%;
+  }
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(38deg, #72fdff, #2e72fd);
+  background-size: 400% 400%;
+
+  -webkit-animation: AnimationName 17s ease infinite;
+  animation: AnimationName 17s ease infinite;
+}
+
+a {
+  text-decoration: none;
+}
+
+.link_to_login {
+  color: #408ce3;
+  font-size: calc(9px + 5 * (100vw / 1580));
+  padding: 3px;
+}
+
+section.login-section {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  width: 28%;
+  min-height: 60%;
+  border-radius: 10px;
+  min-width: 300px;
+  padding: 25px 0;
+}
+.login-block .content {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+/* Password reset */
+
+section.login-section .block-70p {
+  width: 70%;
+}
+
+.password_reset_content {
+  width: 85%;
+  height: 80%;
+}
+
+span.message_reset_body {
+  font-size: calc(12px + 6 * (100vw / 1580));
+  color: #292929;
+  line-height: 1.35;
+}
+
+/* done */
+
+form.login-form {
+  width: 100%;
+}
+
+.login-title {
+  color: black;
+  font-size: calc(13px + 6 * (100vw / 1580));
+}
+
+textarea.login-input, input.login-input {
+  transition: 0.35s;
+  background-color: #e7e7e7;
+  width: 100%;
+  height: 55px;
+  margin: 15px 0;
+  padding: 0 10px;
+  font-size: calc(8px + 5 * (100vw / 1580));
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+textarea.login-input, input.login-input:focus {
+  transition: 0.4s;
+  -webkit-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  transform: scale(1.04);
+  box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.08);
+}
+
+textarea.login-input{
+}
+
+input.login-submit-button {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  color: #ffff;
+  border: none;
+  border-radius: 5px;
+  font-size: calc(8px + 5 * (100vw / 1580));
+  margin-top: 30px;
+}
+input.login-submit-button:active {
+  background-color: #408ce3;
+}
+.links {
+  display: flex;
+  justify-content: flex-end;
+  color: #408ce3;
+  margin-top: 1%;
+}
+
+.link_to_login:hover {
+  border: 1px solid #408ce3;
+  border-radius: 3px;
+  padding: 2px;
+}
+.link_to_login:active {
+  color: aquamarine;
+  border: 1px solid aquamarine;
+}
+.message {
+  position: absolute;
+  top: 10%;
+  font-size: calc(15px + 9 * (100vw / 1580));
+  color: black;
+  font-weight: 500;
+}
+
+.success-url-block {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+
+  background: rgb(67, 171, 255);
+  background: radial-gradient(
+    circle,
+    rgba(67, 171, 255, 1) 0%,
+    rgba(95, 158, 255, 1) 100%
+  );
+}
+.success-url-block a {
+  color: #fff;
+  text-decoration: none;
+  font-size: calc(12px + 6 * (100vw / 1580));
+}

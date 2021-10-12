@@ -1,0 +1,43 @@
+{% extends 'accounts/base_register.html' %}
+
+{% block title %}Вход в аккаунт{% endblock %}
+
+{% block to_start_link %}
+    <div class="success-url-block"><a href="{{success_url}}">Назад</a></div>
+{% endblock %}
+
+{% block main %}
+    <div class="login-block">
+
+        <div class="content">
+            <div class="login-title">Вход в аккаунт</div>
+            <form class="login-form" action="{% url 'accounts:login' %}?next={{success_url}}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{field}}
+
+                    {% comment %} {% for error in field.errors %}
+                        <h1>{{field.__dict__}}</h1>
+                    {% endfor %} {% endcomment %}
+
+                {% endfor %}
+                
+                <div class="links">
+                    <a class="link_to_login" href="{% url 'accounts:register' %}?next={{success_url}}">Зарегестрироваться</a>
+                </div>
+                <div class="links">
+                    <a class="link_to_login" href="{% url 'accounts:password_reset' %}">Забыл\а пароль</a>
+                </div>
+                <div class="links">
+                    <a class="link_to_login" href="/login/vk-oauth2">Войти через VK</a>
+                </div>
+                <input class="login-submit-button" type="submit" value="Войти"> 
+
+                
+                
+            </form>
+        </div>
+
+    </div>     
+{% endblock %}
+

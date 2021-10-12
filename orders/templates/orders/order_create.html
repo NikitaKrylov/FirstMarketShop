@@ -1,0 +1,81 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+<!--  extends 'accounts/base_register.html' 
+
+{% block title %}Восстановление пароля{% endblock %} -->
+
+<!-- {% block main %}
+
+    <div class="login-block block-70p">
+                    
+        <div class="content">
+
+            <div class="login-title">Создание заказа</div>
+            <form class="login-form" action="{% url 'orders:create_order' request.user.pk %}" method="POST">
+
+                {% csrf_token %}
+                {% for field in form %}
+
+                    {{field}}
+
+
+                {% endfor %}
+                <input class="login-submit-button" type="submit" value="Сохранить пароль"> 
+
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %} -->
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+    <section class="account-page">
+
+        <div class="container">
+            <div class="wrapper">
+
+                <div class="label-block">
+                    <h2>Оформление заказа</h2>
+                </div>
+                <form class="login-form" action="{% url 'orders:create_order' request.user.pk %}" method="POST">
+
+
+                    <div style="margin: 0 0 4% 0;" class="baner-content">
+                        <div style="padding: 5% 20%;" class="content-body"> 
+
+                            {% csrf_token %}
+                            {% for field in form %}
+
+                                {{field}}
+
+                            {% endfor %}
+                            
+
+                        </div>
+                    </div>
+
+                    <div style="margin: 0 0 4% 0;" class="baner-content">
+                        <div class="content-body">
+                            <h3 style="color: black;">Колличество товаров: {{cart.get_amount_products}}</h3>
+                            <h3 style="color: black;">Общая ценна: {{cart.get_final_price}}</h3>
+                            
+                            <input class="black-button" type="submit" value="Отправить заказ"> 
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+

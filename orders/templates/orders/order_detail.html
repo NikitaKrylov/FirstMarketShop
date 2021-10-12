@@ -1,0 +1,61 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+    <section class="account-page">
+
+        <div class="container">
+            <div class="wrapper">
+
+                <div class="label-block">
+                    <h2>Заказ №{{object.id}} от {{object.created}}</h2>
+                </div>
+                
+
+
+                <div style="margin: 0 0 4% 0;" class="baner-content">
+                    
+
+                       {% for order_product in object.cart.all %}
+
+                            <div class="cart-content">
+                                <div class="cart-block-image">
+                                    <img src="{{order_product.content_object.image.url}}" alt="">
+                                </div>
+                                <div class="cart-block-content">
+                                    <a class="product-name-label" href="{% url 'shop:product_page' order_product.get_product_model order_product.get_product_slug %}">{{product.get_name}}</a>
+                                    <div class="info-small">
+                                        <span>Цена: {{order_product.get_price}}</span>
+                                        
+                                        <span>Колличество: {{order_product.quantity}}шт.</span>
+
+                                        <span>Общая цена: {{order_product.calc_finale_price}}</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                       {% endfor %}
+                        
+
+                    
+                </div>
+
+                
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+    <link rel="stylesheet" href="{% static 'orders/css/orders_style.css' %}">
+
+{% endblock style %}

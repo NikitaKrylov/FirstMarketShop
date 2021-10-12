@@ -1,0 +1,34 @@
+{% extends 'accounts/base_register.html' %}
+
+{% block title %}Регистрация аккаунта{% endblock %}
+
+{% block to_start_link %}
+    <div class="success-url-block"><a href="{{success_url}}">Назад</a></div>
+{% endblock %}
+
+
+{% block main%}
+
+    <div class="login-block">
+
+        <div class="content">
+            <div class="login-title">Регистрация аккаунта</div>
+            <form class="login-form" action="{% url 'accounts:register' %}?next={{success_url}}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{field}}
+                {% endfor %}
+                
+                <div class="linktologout"><a class="link_to_login" href="{% url 'accounts:login' %}?next={{success_url}}">Войти в аккаунт</a></div>
+                <input class="login-submit-button" type="submit" value="Зарегестрироваться"> 
+                
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+
+
