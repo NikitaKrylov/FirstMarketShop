@@ -1,5 +1,4 @@
 from django.urls.conf import re_path
-import numpy
 from embed_video.fields import EmbedVideoField
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
